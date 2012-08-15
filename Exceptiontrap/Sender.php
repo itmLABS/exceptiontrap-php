@@ -13,36 +13,75 @@ class ExceptiontrapSender
       'X-Api-Key' => Exceptiontrap::$apiKey
     );
 
-    // self::debugRequest($url, $headers, $xml_data);
-    self::zendRequest($url, $headers, $serializedData);
+    self::postRequest($url, $headers, $serializedData);
   }
 
-  static function zendRequest($url, $headers, $data)
+  /*
+  * Decides if cURL or pure php transport (stream_socket_client) is used
+  */
+  static function postRequest($url, $headers, $data)
   {
-    require_once('Zend/Loader.php');
-    require_once('Zend/Http/Client.php');
-
-    $client = new Zend_Http_Client($url);
-    $client->setHeaders($headers);
-    $client->setRawData($data, self::$contentType);
-    $client->setConfig(array('maxredirects' => 1, 'timeout' => Exceptiontrap::$timeout));
-
-    // try{
-    //   $response = $client->request('POST');
-    // }catch(Exception $e){ // Timeout Exception because the HTTP_CLIENT dont terminate gracefully
-    //   throw new RuntimeException($e->getMessage());
-    // }
-
-    $response = $client->request('POST');
-    // return $response->getStatus();
+    if (function_exists('curl_version')) {
+      self::curlRequest($url, $headers, $data);
+    } else {
+      self::phpRequest($url, $headers, $data);
+    }
   }
 
-  static function debugRequest($url, $headers, $data)
+  /*
+  * POST the data via cURL extension
+  */
+  static function curlRequest($url, $headers, $data)
   {
-    header("Content-type: text/xml");
-    echo $data;
+    $protocol = Exceptiontrap::$ssl ? 'https://' : 'http://';
+    $header = array('Expect:'); // Fixes slow requests http://php.net/manual/de/ref.curl.php
+    foreach ($headers as $k => $v) {
+      array_push($header, $k . ": " . $v);
+    }
 
-    die();
+    $client = curl_init();
+    curl_setopt($client, CURLOPT_URL, $protocol . $url);
+    curl_setopt($client, CURLOPT_RETURNTRANSFER, false);
+    curl_setopt($client, CURLOPT_CONNECTTIMEOUT, Exceptiontrap::$timeout);
+    curl_setopt($client, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($client, CURLOPT_POST, true);
+    curl_setopt($client, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($client, CURLOPT_SSL_VERIFYPEER, false);
+
+    $response = curl_exec($client);
+    curl_close($client);
   }
 
+  /*
+  * POST the data via stream_socket_client
+  * Fallback if cURL extension is not available
+  */
+  static function phpRequest($url, $headers, $data)
+  {
+    $protocol = Exceptiontrap::$ssl ? 'ssl://' : '';
+    $url = parse_url($url);
+    $host = $url['host'];
+    $path = $url['path'];
+
+    if (isset($url['port'])) { // Used in development
+      $port = ':' . $url['port'];
+    } else {
+      $port = Exceptiontrap::$ssl ? ':443' : ':80';
+    }
+
+    $headers['Host'] = $host;
+    $headers['Content-Length'] = strlen($data);
+    $headers['Connection'] = 'close';
+
+    $header = '';
+    foreach($headers as $k => $v) {
+      $header .= "{$k}: {$v}\r\n";
+    }
+
+    $socket = stream_socket_client($protocol . $host . $port, $errno, $errstr, Exceptiontrap::$timeout, STREAM_CLIENT_CONNECT);
+    fwrite($socket, "POST $path HTTP/1.1\r\n");
+    fwrite($socket, $header . "\r\n");
+    fwrite($socket, $data . "\r\n");
+    fclose($socket);
+  }
 }

@@ -11,7 +11,7 @@ class Exceptiontrap
   static $notifierVersion = '0.1';
   // $notifierUrl = 'http://github.com/exceptiontrap/exceptiontrap-php';
   static $apiVersion = '1';
-  static $apiUrl = 'http://alpha.exceptiontrap.com/notifier/api/v1/problems.json';
+  static $apiUrl = 'alpha.exceptiontrap.com/notifier/api/v1/problems.json';
   static $timeout = 2;
 
   static $oldExceptionHandler;
