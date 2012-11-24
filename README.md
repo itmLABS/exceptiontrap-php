@@ -55,7 +55,7 @@ You can find your API-Key by login to your [Exceptiontrap Account](https://alpha
 
 ## Known Issues / Todo
 
-Optimize and insert the test suite to the gem.
+Optimize and insert the test suite to plugin.
 
 
 Copyright (c) 2012 [Torsten Bühl], released under the MIT license
