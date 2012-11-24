@@ -9,7 +9,7 @@ class Exceptiontrap
 
   static $notifierName = 'exceptiontrap-php';
   static $notifierVersion = '0.1';
-  // $notifierUrl = 'http://github.com/exceptiontrap/exceptiontrap-php';
+  // $notifierUrl = 'https://github.com/itmlabs/exceptiontrap-php';
   static $apiVersion = '1';
   static $apiUrl = 'alpha.exceptiontrap.com/notifier/api/v1/problems.json';
   static $timeout = 2;
