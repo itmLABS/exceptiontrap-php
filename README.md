@@ -12,7 +12,7 @@ The plugin / class is compatible with PHP >= 5.2
 
 #### 1. Install
 
-Download the class from here and copy it to your desired folder (ie. `Exceptiontrap/`)
+Download the class from here and copy it to your desired folder (i.e. `Exceptiontrap/`)
 
 #### 2. Configure
 
@@ -27,7 +27,7 @@ and you should be fine.
 
 #### 1. Install
 
-Download the class from here and copy it to your desired library folder (ie. `/libraries/Exceptiontrap/`)
+Download the class from here and copy it to your desired library folder (i.e. `/libraries/Exceptiontrap/`)
 
 #### 2. Configure
 
@@ -54,8 +54,6 @@ Or register the plugin manually to the front controller
 You can find your API-Key by login to your [Exceptiontrap Account](https://alpha.exceptiontrap.com/login), select the application and follow the **Setup** Link.
 
 ## Known Issues / Todo
-
-SSL-Support is not included.
 
 Optimize and insert the test suite to the gem.
 
