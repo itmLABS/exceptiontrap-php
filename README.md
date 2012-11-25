@@ -8,7 +8,7 @@ The plugin / class is compatible with PHP >= 5.2
 
 ## Setup
 
-### Pure PHP
+### PHP
 
 #### 1. Install
 
