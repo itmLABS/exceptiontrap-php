@@ -33,16 +33,20 @@ Download the class from here and copy it to your desired library folder (i.e. `/
 
 Now insert the following lines into your applications codebase.
 
-    require_once 'Exceptiontrap/Exceptiontrap.php';
-    Exceptiontrap::setup('YOUR_API_KEY', false, 'YOUR_APPLICATION_ENV');
+```php
+require_once 'Exceptiontrap/Exceptiontrap.php';
+Exceptiontrap::setup('YOUR_API_KEY', false, 'YOUR_APPLICATION_ENV');
+```
 
 #### 3. Register Plugin for better integration
 
 If you use the Bootsrap class insert the following method.
 
-    protected function _initExceptiontrap(){
-      Zend_Controller_Front::getInstance()->registerPlugin(new Exceptiontrap_ErrorHandler());
-    }
+```php
+protected function _initExceptiontrap(){
+  Zend_Controller_Front::getInstance()->registerPlugin(new Exceptiontrap_ErrorHandler());
+}
+```
 
 Or register the plugin manually to the front controller.
 
