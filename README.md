@@ -18,8 +18,10 @@ Download the class from here and copy it to your desired folder (i.e. `Exception
 
 Now insert the following lines into your applications codebase
 
-    require_once 'Exceptiontrap/Exceptiontrap.php';
-    Exceptiontrap::setup('YOUR_API_KEY', false, 'YOUR_APPLICATION_ENV');
+```php
+require_once 'Exceptiontrap/Exceptiontrap.php';
+Exceptiontrap::setup('YOUR_API_KEY', false, 'YOUR_APPLICATION_ENV');
+```
 
 and you should be fine.
 
@@ -50,8 +52,10 @@ protected function _initExceptiontrap(){
 
 Or register the plugin manually to the front controller.
 
-    $controller = Zend_Controller_Front::getInstance();
-    $controller->registerPlugin(new Exceptiontrap_ErrorHandler());
+```php
+$controller = Zend_Controller_Front::getInstance();
+$controller->registerPlugin(new Exceptiontrap_ErrorHandler());
+```
 
 ## Information / Further Configuration
 
@@ -59,21 +63,27 @@ You can find your API-Key by login to your [Exceptiontrap Account](https://alpha
 
 If you have data in your request params, session or environment, which you don't want to be sent to Exceptiontrap, set them as follows:
 
-    Exceptiontrap::setFilterParams(array('HTTP_COOKIE', '_app_session', 'password'));
+```php
+Exceptiontrap::setFilterParams(array('HTTP_COOKIE', '_app_session', 'password'));
+```
 
 You can also specify exceptions and errors, which should be ignored and not sent.
 
-    Exceptiontrap::setIgnoreList(array('InvalidArgumentException', 'Zend_Translate_Exception'));
+```php
+Exceptiontrap::setIgnoreList(array('InvalidArgumentException', 'Zend_Translate_Exception'));
+```
 
 ### Better integration for your framework (Symfony, CodeIgniter, Lithium, ...)
 
 Until the class is extended to support other frameworks directly as a plugin, you can set the request-components by yourself. The `setRequestComponents` class method expects an associated array to do this.
 
-    Exceptiontrap::setRequestComponents(array(
-      'module' => 'YOUR_CURRENT_MODULE',
-      'controller' => 'YOUR_CURRENT_CONTROLLER',
-      'action' => 'YOUR_CURRENT_ACTION'
-    ));
+```php
+Exceptiontrap::setRequestComponents(array(
+  'module' => 'YOUR_CURRENT_MODULE',
+  'controller' => 'YOUR_CURRENT_CONTROLLER',
+  'action' => 'YOUR_CURRENT_ACTION'
+));
+```
 
 ## Known Issues / Todo
 
