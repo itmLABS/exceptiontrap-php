@@ -1,6 +1,6 @@
 # Exceptiontrap
 
-This notifier class is used to send the exceptions and errors of your PHP (and Zend Framework) applications to the [Exceptiontrap](https://alpha.exceptiontrap.com) webservice.
+This notifier class is used to catch and send exceptions and errors of your PHP (and Zend Framework) applications to the [Exceptiontrap](https://alpha.exceptiontrap.com) webservice.
 
 The plugin / class is compatible with PHP >= 5.2
 
