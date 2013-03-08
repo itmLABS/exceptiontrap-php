@@ -88,4 +88,4 @@ Exceptiontrap::setRequestComponents(array(
 * Optimize and insert the test suite to plugin.
 * Better integration for other frameworks.
 
-Copyright (c) 2012 [Torsten Bühl], released under the MIT license
+Copyright (c) 2013 [Torsten Bühl], released under the MIT license
