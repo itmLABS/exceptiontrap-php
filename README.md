@@ -1,10 +1,8 @@
-# Exceptiontrap
+# Exceptiontrap PHP
 
-This notifier class is used to catch and send exceptions and errors of your PHP (and Zend Framework) applications to the [Exceptiontrap](https://alpha.exceptiontrap.com) webservice.
+This notifier class is used to catch and send exceptions and errors of your PHP (and Zend Framework) applications to the [Exceptiontrap](https://exceptiontrap.com) webservice.
 
 The plugin / class is compatible with PHP >= 5.2
-
-**This is an Alpha Release**
 
 ## Setup
 
@@ -59,7 +57,7 @@ $controller->registerPlugin(new Exceptiontrap_ErrorHandler());
 
 ## Information / Further Configuration
 
-You can find your API-Key by login to your [Exceptiontrap Account](https://alpha.exceptiontrap.com/login), select the application and follow the **Setup** Link.
+You can find your API-Key by login to your [Exceptiontrap Account](https://exceptiontrap.com/login), select the application and follow the **Setup** Link.
 
 If you have data in your request params, session or environment, which you don't want to be sent to Exceptiontrap, set them as follows:
 
