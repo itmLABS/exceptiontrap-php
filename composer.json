@@ -1,0 +1,13 @@
+{
+    "name": "exceptiontrap/exceptiontrap",
+    "description": "Exception and Error Notifier / Tracker",
+    "license": "MIT",
+    "keywords": [
+        "exception notifier",
+        "exception tracker"
+    ],
+    "homepage": "https://github.com/itmLABS/exceptiontrap-php",
+    "require": {
+        "php": ">=5.2.0"
+    }
+}
