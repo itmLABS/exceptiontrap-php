@@ -87,22 +87,17 @@ class Exceptiontrap
   /* TODO: Move to Catcher class */
   static function installNotifier()
   {
-    // self::$oldErrorHandler = setErrorHandler(array('Exceptiontrap', 'handleError')); // self
+    self::$oldErrorHandler = set_error_handler(array('Exceptiontrap', 'handleError'));
     self::$oldExceptionHandler = set_exception_handler(array('Exceptiontrap', 'handleException'));
     register_shutdown_function(array('Exceptiontrap', 'handleShutdown'));
   }
 
   static function handleError($code, $message, $file, $line)
   {
-    // echo "handleError: ";
-    // echo $message . "\n";
-    // echo $file. "\n";
-    // echo $line . "\n";
-    // echo "\n";
-
-    // get data
-    // send it with notifier
-    // self::handle_exception($exception);
+    // if FATAL error, delegate to exception handler
+    if ($code == 1) {
+      self::handleException(new ErrorException($message, $code, $code, $file, $line));
+    }
 
     // call old error handler
     if (self::$oldErrorHandler) {
@@ -117,8 +112,7 @@ class Exceptiontrap
 
     // send or ignore
     if (!in_array(get_class($exception), self::$ignoreList)){
-      // send it with notifier
-      ExceptiontrapSender::notify($data);
+      ExceptiontrapSender::notify($data); // send it with notifier
     }
 
     // call old exception handler
