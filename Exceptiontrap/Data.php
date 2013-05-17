@@ -88,11 +88,13 @@ class ExceptiontrapData
 
   function filterParams($params)
   {
-    foreach ($params as $k => $v){
-      if (is_array($v)){
-        $params[$k] = $this->filterParams($v);
-      } else {
-        if (in_array($k, Exceptiontrap::$filterParams)) $params[$k] = '[FILTERED]';
+    if (is_array($params)) {
+      foreach ($params as $k => $v){
+        if (is_array($v)){
+          $params[$k] = $this->filterParams($v);
+        } else {
+          if (in_array($k, Exceptiontrap::$filterParams)) $params[$k] = '[FILTERED]';
+        }
       }
     }
     return $params;
