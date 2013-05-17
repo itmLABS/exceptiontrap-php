@@ -8,7 +8,7 @@ class Exceptiontrap
   static $ssl;
 
   static $notifierName = 'exceptiontrap-php';
-  static $notifierVersion = '1.0.0';
+  static $notifierVersion = '1.0.1';
   // $notifierUrl = 'https://github.com/itmlabs/exceptiontrap-php';
   static $apiVersion = '1';
   static $apiUrl = 'exceptiontrap.com/notifier/api/v1/problems.json';
