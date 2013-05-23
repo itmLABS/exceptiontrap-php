@@ -87,7 +87,7 @@ class Exceptiontrap
   /* TODO: Move to Catcher class */
   static function installNotifier()
   {
-    self::$oldErrorHandler = set_error_handler(array('Exceptiontrap', 'handleError'));
+    // self::$oldErrorHandler = set_error_handler(array('Exceptiontrap', 'handleError'));
     self::$oldExceptionHandler = set_exception_handler(array('Exceptiontrap', 'handleException'));
     register_shutdown_function(array('Exceptiontrap', 'handleShutdown'));
   }
