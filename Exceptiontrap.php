@@ -25,6 +25,8 @@ class Exceptiontrap
   static $ignoreList = array();
   static $customParams = array();
 
+  static $catchable_error_types = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR);
+
   /**
   * Set the request components (module, controller and action)
   *
@@ -92,15 +94,15 @@ class Exceptiontrap
     register_shutdown_function(array('Exceptiontrap', 'handleShutdown'));
   }
 
-  static function handleError($code, $message, $file, $line)
+  static function handleError($code, $message, $file, $line, $shutdown = false)
   {
     // if FATAL error, delegate to exception handler
-    if ($code == 1) {
+    if (in_array($code, self::$catchable_error_types)) {
       self::handleException(new ErrorException($message, $code, $code, $file, $line));
     }
 
     // call old error handler
-    if (self::$oldErrorHandler) {
+    if (self::$oldErrorHandler && !$shutdown) {
       call_user_func(self::$oldErrorHandler, $code, $message, $file, $line);
     }
   }
@@ -124,7 +126,7 @@ class Exceptiontrap
   static function handleShutdown()
   {
     if ($error = error_get_last()) {
-      self::handleError($error['type'], $error['message'], $error['file'], $error['line']);
+      self::handleError($error['type'], $error['message'], $error['file'], $error['line'], true);
     }
   }
   /* - End Catcher */
