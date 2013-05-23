@@ -1,9 +1,9 @@
 <?php
 class ExceptiontrapSender
 {
-  static $contentType = 'application/json';
+  private static $contentType = 'application/json';
 
-  static function notify($data)
+  public static function notify($data)
   {
     $serializedData = $data->toJson();
     $url = Exceptiontrap::$apiUrl;
@@ -19,7 +19,7 @@ class ExceptiontrapSender
   /*
   * Decides if cURL or pure php transport (stream_socket_client) is used
   */
-  static function postRequest($url, $headers, $data)
+  private static function postRequest($url, $headers, $data)
   {
     if (function_exists('curl_version')) {
       self::curlRequest($url, $headers, $data);
@@ -31,7 +31,7 @@ class ExceptiontrapSender
   /*
   * POST the data via cURL extension
   */
-  static function curlRequest($url, $headers, $data)
+  private static function curlRequest($url, $headers, $data)
   {
     $protocol = Exceptiontrap::$ssl ? 'https://' : 'http://';
     $header = array('Expect:'); // Fixes slow requests http://php.net/manual/de/ref.curl.php
@@ -56,7 +56,7 @@ class ExceptiontrapSender
   * POST the data via stream_socket_client
   * Fallback if cURL extension is not available
   */
-  static function phpRequest($url, $headers, $data)
+  private static function phpRequest($url, $headers, $data)
   {
     $protocol = Exceptiontrap::$ssl ? 'ssl://' : '';
     $url = parse_url($url);

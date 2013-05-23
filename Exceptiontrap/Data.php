@@ -1,13 +1,13 @@
 <?php
 class ExceptiontrapData
 {
-  function __construct($exception)
+  public function __construct($exception)
   {
     $this->exception = $exception;
     $this->collectData();
   }
 
-  function collectData()
+  private function collectData()
   {
     $data = array();
     $data['notifier'] = Exceptiontrap::$notifierName;
@@ -28,7 +28,7 @@ class ExceptiontrapData
     $this->data = $data;
   }
 
-  function getRequestComponents()
+  private function getRequestComponents()
   {
     return array(
       'controller' => Exceptiontrap::$controller,
@@ -37,22 +37,22 @@ class ExceptiontrapData
     );
   }
 
-  function getLocation()
+  private function getLocation()
   {
     return $this->exception->getLine() . ' in ' . $this->exception->getFile();
   }
 
-  function getRequestParams()
+  private function getRequestParams()
   {
     return $_REQUEST;
   }
 
-  function getTrace()
+  private function getTrace()
   {
     return explode("\n", $this->exception->getTraceAsString());
   }
 
-  function getApplicationRoot()
+  private function getApplicationRoot()
   {
     if (isset($_SERVER['DOCUMENT_ROOT'])) {
       return $_SERVER['DOCUMENT_ROOT'];
@@ -61,7 +61,7 @@ class ExceptiontrapData
     }
   }
 
-  function getRequestUri()
+  private function getRequestUri()
   {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
     $host = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
@@ -76,17 +76,17 @@ class ExceptiontrapData
     return $protocol . $host . $port . $path;
   }
 
-  function getSessionData()
+  private function getSessionData()
   {
     return isset($_SESSION) ? $_SESSION : '';
   }
 
-  function getEnvironmentData()
+  private function getEnvironmentData()
   {
     return $_SERVER;
   }
 
-  function filterParams($params)
+  private function filterParams($params)
   {
     if (is_array($params)) {
       foreach ($params as $k => $v){
@@ -100,17 +100,17 @@ class ExceptiontrapData
     return $params;
   }
 
-  function filterBacktrace($backtrace)
+  private function filterBacktrace($backtrace)
   {
     return $backtrace; // TODO: Implement
   }
 
-  function toJson()
+  public function toJson()
   {
     return json_encode(array('problem' => $this->data));
   }
 
-  function toXml()
+  public function toXml()
   {
     $doc = new SimpleXMLElement('<problem />');
 
