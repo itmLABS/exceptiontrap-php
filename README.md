@@ -44,7 +44,7 @@ If you use the Bootsrap class insert the following method.
 
 ```php
 protected function _initExceptiontrap(){
-  Zend_Controller_Front::getInstance()->registerPlugin(new Exceptiontrap_ErrorHandler());
+  Zend_Controller_Front::getInstance()->registerPlugin(new Exceptiontrap_Services_Zf1ErrorHandler());
 }
 ```
 
@@ -52,7 +52,7 @@ Or register the plugin manually to the front controller.
 
 ```php
 $controller = Zend_Controller_Front::getInstance();
-$controller->registerPlugin(new Exceptiontrap_ErrorHandler());
+$controller->registerPlugin(new Exceptiontrap_Services_Zf1ErrorHandler());
 ```
 
 ## Information / Further Configuration
