@@ -1,11 +1,11 @@
 <?php
 require_once 'Zend/Controller/Plugin/ErrorHandler.php';
-require_once dirname(__FILE__) . '/Exceptiontrap.php';
+require_once dirname(__FILE__) . '/../Exceptiontrap.php';
 /**
 * Subclass default error handler to make it called upon 'preDispatch' event and not 'postDispatch' to prevent query from being executed if an error occured within pre-preDispatch event plugins (ex: request extractor, param cleaner, queried account filter...)
 *
 */
-class Exceptiontrap_ErrorHandler extends Zend_Controller_Plugin_ErrorHandler
+class Exceptiontrap_Services_Zf1ErrorHandler extends Zend_Controller_Plugin_ErrorHandler
 {
   /**
   * Upon starting application, unregister default error handler
