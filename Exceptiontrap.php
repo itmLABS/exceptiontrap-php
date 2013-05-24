@@ -25,6 +25,10 @@ class Exceptiontrap
 
   private static $customParams = array();
   private static $ignoreList = array();
+
+  /**
+  * @var array List of the error types that should be catched
+  */
   private static $catchable_error_types = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR);
 
   /**
@@ -107,6 +111,11 @@ class Exceptiontrap
     }
   }
 
+  /**
+  * Handles a given exception
+  *
+  * @param Exception $exception
+  */
   public static function handleException($exception)
   {
     // get data
@@ -123,6 +132,9 @@ class Exceptiontrap
     }
   }
 
+  /**
+  * Handles the php shutdown function for fatal errors
+  */
   public static function handleShutdown()
   {
     if ($error = error_get_last()) {
