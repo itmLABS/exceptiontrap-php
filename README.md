@@ -18,7 +18,7 @@ Now insert the following lines into your applications codebase
 
 ```php
 require_once 'Exceptiontrap/Exceptiontrap.php';
-Exceptiontrap::setup('YOUR_API_KEY', false, 'YOUR_APPLICATION_ENV');
+Exceptiontrap::setup('YOUR_API_KEY', true, 'YOUR_APPLICATION_ENV');
 ```
 
 and you should be fine.
@@ -35,7 +35,7 @@ Now insert the following lines into your applications codebase.
 
 ```php
 require_once 'Exceptiontrap/Exceptiontrap.php';
-Exceptiontrap::setup('YOUR_API_KEY', false, 'YOUR_APPLICATION_ENV');
+Exceptiontrap::setup('YOUR_API_KEY', true, 'YOUR_APPLICATION_ENV');
 ```
 
 #### 3. Register Plugin for better integration
