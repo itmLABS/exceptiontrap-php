@@ -29,7 +29,7 @@ class Exceptiontrap
   /**
   * @var array List of the error types that should be catched
   */
-  private static $catchable_error_types = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR);
+  private static $error_types_to_catch = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR);
 
   /**
   * Set the request components (module, controller and action)
@@ -100,8 +100,8 @@ class Exceptiontrap
 
   public static function handleError($code, $message, $file, $line, $shutdown = false)
   {
-    // if FATAL error, delegate to exception handler
-    if (in_array($code, self::$catchable_error_types)) {
+    // if FATAL error or similar, delegate to exception handler
+    if (in_array($code, self::$error_types_to_catch)) {
       self::handleException(new ErrorException($message, $code, $code, $file, $line));
     }
 
