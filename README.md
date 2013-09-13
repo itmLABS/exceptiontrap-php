@@ -10,7 +10,7 @@ The plugin / class is compatible with PHP >= 5.2
 
 #### 1. Install
 
-Download the class from here and copy it to your desired folder (i.e. `Exceptiontrap/`).
+Download the class from here and copy it to your desired folder (i.e. `Exceptiontrap/`) in your include path.
 
 #### 2. Configure
 
