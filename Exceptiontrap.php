@@ -71,14 +71,15 @@ class Exceptiontrap
   /**
   * Activate the exceptiontrap
   *
-  * @param string   $apiKey       The api-key of your application at exceptiontrap.com
+  * @param string   $apiKey       The api-key of your application at exceptiontrap.com, may be overwritten by env
   * @param boolean  $ssl          Use SSL for the connection
   * @param string   $environment  The envíronment, in which the application is running
   * @param array    $ignoreList   List of exceptions names which should be ignored (not sent)
   */
   public static function setup($apiKey = null, $ssl = false, $environment = 'production', $ignoreList = array())
   {
-    self::$apiKey = $apiKey;
+    // Use env api key over initializer api key, if set there. For example when used with Heroku and the Exceptiontrap Heroku addon
+    self::$apiKey = getenv('EXCEPTIONTRAP_API_KEY') ? getenv('EXCEPTIONTRAP_API_KEY') : $apiKey;
     self::$environment = $environment;
     self::$ssl = $ssl;
     self::$ignoreList = $ignoreList;
