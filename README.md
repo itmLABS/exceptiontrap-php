@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/46d2a475d1bdd2197677/maintainability)](https://codeclimate.com/github/itmLABS/exceptiontrap-php/maintainability)
+
 # Exceptiontrap PHP
 
 This Exceptiontrap notifier class is used to catch and send exceptions and errors of your PHP (and Zend Framework) applications to the [Exceptiontrap](https://exceptiontrap.com) webservice.
